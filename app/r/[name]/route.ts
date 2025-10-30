@@ -21,6 +21,37 @@ export async function GET(
     const fileContents = await fs.readFile(registryPath, "utf8");
     const data = JSON.parse(fileContents);
 
+    // Read the actual component files and add their content
+    if (data.files && Array.isArray(data.files)) {
+      const filesWithContent = await Promise.all(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        data.files.map(async (file: any) => {
+          try {
+            // Resolve the component file path relative to registry/blocks
+            const componentPath = path.join(
+              process.cwd(),
+              "registry",
+              "blocks",
+              file.path
+            );
+
+            // Read the component content
+            const content = await fs.readFile(componentPath, "utf8");
+
+            return {
+              ...file,
+              content,
+            };
+          } catch (error) {
+            console.error(`Error reading file ${file.path}:`, error);
+            return file;
+          }
+        })
+      );
+
+      data.files = filesWithContent;
+    }
+
     // Return the JSON response
     return NextResponse.json(data, {
       headers: {
