@@ -1,0 +1,14 @@
+[
+  {
+    "name": "features-4",
+    "type": "registry:block",
+    "description": "A features section component with 6 feature cards in a grid layout with icons and descriptions",
+    "registryDependencies": [],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "files": [
+      "components/features-4.tsx"
+    ]
+  }
+]
