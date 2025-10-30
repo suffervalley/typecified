@@ -117,6 +117,27 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased text-sm;
   }
+}
+
+@keyframes scroll-down {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.animate-scroll-down {
+  animation: scroll-down 2s infinite;
 }
