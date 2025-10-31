@@ -57,7 +57,16 @@ export const PreviewCode = ({
 
   const copyCommandToClipboard = async () => {
     if (!registryName) return;
-    const installCommand = `https://typecified.com/r/${registryName}`;
+
+    // Build the full command based on the selected package manager
+    const commands = {
+      npm: `npx shadcn@latest add https://typecified.com/r/${registryName}`,
+      yarn: `yarn dlx shadcn@latest add https://typecified.com/r/${registryName}`,
+      pnpm: `pnpm dlx shadcn@latest add https://typecified.com/r/${registryName}`,
+      bun: `bunx --bun shadcn@latest add https://typecified.com/r/${registryName}`,
+    };
+
+    const installCommand = commands[packageManager] || commands.npm;
     await navigator.clipboard.writeText(installCommand);
     setCopiedCommand(true);
     setTimeout(() => setCopiedCommand(false), 2000);
