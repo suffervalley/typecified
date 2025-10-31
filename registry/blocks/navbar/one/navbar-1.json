@@ -1,0 +1,20 @@
+{
+  "name": "navbar-1",
+  "type": "registry:block",
+  "registryDependencies": ["button"],
+  "dependencies": ["lucide-react"],
+  "devDependencies": [],
+  "tailwind": {
+    "config": {
+      "plugins": ["@tailwindcss/container-queries"]
+    }
+  },
+  "cssVars": {},
+  "files": [
+    {
+      "path": "index.tsx",
+      "type": "registry:block",
+      "target": "components/navbar-1.tsx"
+    }
+  ]
+}

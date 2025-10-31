@@ -1,15 +1,13 @@
+import { PreviewCode } from "@/components/preview-code";
 import Sidebar from "@/containers/sidebar";
+import Features from "@/registry/blocks/features/one";
+import { Navbar } from "@/registry/blocks/navbar/one";
 
 export default function Home() {
   return (
-    <div className="flex">
+    <>
       <Sidebar />
-      <main className="flex-1 md:ml-52 border-x mr-8 min-h-screen">
-        <div
-          aria-hidden="true"
-          className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50 border-y"
-        />
-
+      <main className="flex-1 lg:ml-52 border-x mx-4 lg:mx-8 min-h-screen">
         <div className="max-w-5xl mx-auto">
           <section className="relative py-16">
             <div className="mx-auto px-6">
@@ -34,7 +32,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="space-y-6 text-lg">
+                <div className="space-y-6 text-base text-foreground/80">
                   <p>
                     Stop reinventing the wheel. Access a growing collection of
                     beautiful, accessible components built with modern web
@@ -57,11 +55,24 @@ export default function Home() {
           </section>
         </div>
 
-        <div
-          aria-hidden="true"
-          className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50 border-y"
-        />
+        <div className="space-y-6">
+          <PreviewCode
+            title="A simple Navigation"
+            filePath="registry/blocks/navbar/one/index.tsx"
+            registryName="navbar-1"
+          >
+            <Navbar />
+          </PreviewCode>
+
+          <PreviewCode
+            title="A simple Features"
+            filePath="registry/blocks/features/one/index.tsx"
+            registryName="features-1"
+          >
+            <Features />
+          </PreviewCode>
+        </div>
       </main>
-    </div>
+    </>
   );
 }
