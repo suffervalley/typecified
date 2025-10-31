@@ -11,14 +11,17 @@ import {
   Link2,
   Grid3x3,
   DollarSign,
-  LogIn,
-  UserPlus,
-  KeyRound,
   Menu,
   Activity,
+  Sparkles,
+  AlertTriangle,
+  ShieldCheck,
+  FileText,
+  Info,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/containers/theme-toggle";
+import { Logo } from "@/components/logo";
 
 interface SidebarItem {
   name: string;
@@ -34,17 +37,19 @@ const iconMap: Record<string, React.ReactNode> = {
   "logo-client": <Link2 className="size-4" />,
   integrations: <Grid3x3 className="size-4" />,
   pricing: <DollarSign className="size-4" />,
-  login: <LogIn className="size-4" />,
-  register: <UserPlus className="size-4" />,
-  "forgot-password": <KeyRound className="size-4" />,
+  authentication: <ShieldCheck className="size-4" />,
   navbar: <Menu className="size-4" />,
   stats: <Activity className="size-4" />,
   "call-to-action": <MessageSquare className="size-4" />,
   hero: <Star className="size-4" />,
+  "ai-elements": <Sparkles className="size-4" />,
+  "error-pages": <AlertTriangle className="size-4" />,
+  templates: <FileText className="size-4" />,
+  about: <Info className="size-4" />,
 };
 
-// Static menu items based on your registry structure
-const menuItems: SidebarItem[] = [
+// Main menu items
+const mainMenuItems: SidebarItem[] = [
   { name: "Hero", icon: iconMap.hero, href: "/hero" },
   { name: "Navbar", icon: iconMap.navbar, href: "/navbar" },
   {
@@ -68,29 +73,39 @@ const menuItems: SidebarItem[] = [
     icon: iconMap.integrations,
     href: "/integrations",
   },
-  {
-    name: "Register",
-    icon: iconMap.register,
-    href: "/register",
-  },
   { name: "Team", icon: iconMap.team, href: "/team" },
-  {
-    name: "Forgot Password",
-    icon: iconMap["forgot-password"],
-    href: "/forgot-password",
-  },
   {
     name: "Pricing",
     icon: iconMap.pricing,
     href: "/pricing",
   },
-  { name: "Login", icon: iconMap.login, href: "/login" },
+  {
+    name: "Authentication",
+    icon: iconMap.authentication,
+    href: "/authentication",
+  },
   { name: "Stats", icon: iconMap.stats, href: "/stats" },
   {
     name: "Call to Action",
     icon: iconMap["call-to-action"],
     href: "/call-to-action",
   },
+  {
+    name: "AI Elements",
+    icon: iconMap["ai-elements"],
+    href: "/ai-elements",
+  },
+  {
+    name: "Errors",
+    icon: iconMap["error-pages"],
+    href: "/errors",
+  },
+];
+
+// Secondary menu items
+const secondaryMenuItems: SidebarItem[] = [
+  { name: "Templates", icon: iconMap.templates, href: "/templates" },
+  { name: "About", icon: iconMap.about, href: "/about" },
 ];
 
 const Sidebar = () => {
@@ -105,33 +120,75 @@ const Sidebar = () => {
       <div className="flex h-full flex-col">
         {/* Header */}
         <div className="flex h-16 items-center px-4">
-          <LayoutGrid className="size-4" />
+          <Link
+            href="/"
+            aria-label="home"
+            className="flex items-center space-x-2"
+          >
+            <Logo />
+          </Link>
         </div>
 
         {/* Navigation */}
-        <nav className="flex flex-1 items-center overflow-y-auto p-2">
-          <div className="w-full space-y-1">
-            {menuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "flex items-center gap-3 rounded-lg p-2 transition-colors",
-                  pathname === item.href
-                    ? "bg-primary/8 text-primary"
-                    : "text-muted-foreground hover:bg-accent/50 hover:text-accent-foreground"
-                )}
-              >
-                <div className="shrink-0">{item.icon}</div>
-                <span
+        <nav className="flex flex-1 flex-col justify-center overflow-y-auto p-2">
+          {/* Main Menu */}
+          <div className="mb-4">
+            <h3 className="mb-2 px-2 text-xs font-semibold uppercase text-muted-foreground">
+              Blocks
+            </h3>
+            <div className="space-y-1">
+              {mainMenuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
                   className={cn(
-                    "whitespace-nowrap text-sm font-medium transition-opacity duration-300 text-foreground"
+                    "flex items-center gap-2 rounded-lg py-1.5 px-2 transition-colors",
+                    pathname === item.href
+                      ? "bg-primary/8 text-primary"
+                      : "text-muted-foreground hover:bg-accent/50 hover:text-accent-foreground"
                   )}
                 >
-                  {item.name}
-                </span>
-              </Link>
-            ))}
+                  <div className="shrink-0">{item.icon}</div>
+                  <span
+                    className={cn(
+                      "whitespace-nowrap text-sm font-medium transition-opacity duration-300 text-foreground"
+                    )}
+                  >
+                    {item.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Secondary Menu */}
+          <div>
+            <h3 className="my-2 px-2 text-xs font-semibold uppercase text-muted-foreground">
+              Others
+            </h3>
+            <div className="space-y-1">
+              {secondaryMenuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-2 rounded-lg py-1.5 px-2 transition-colors",
+                    pathname === item.href
+                      ? "bg-primary/8 text-primary"
+                      : "text-muted-foreground hover:bg-accent/50 hover:text-accent-foreground"
+                  )}
+                >
+                  <div className="shrink-0">{item.icon}</div>
+                  <span
+                    className={cn(
+                      "whitespace-nowrap text-sm font-medium transition-opacity duration-300 text-foreground"
+                    )}
+                  >
+                    {item.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         </nav>
 

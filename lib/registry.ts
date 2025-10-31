@@ -59,14 +59,11 @@ export async function getRegistryBlocks(): Promise<RegistryBlock[]> {
 export function groupBlocksByCategory(
   blocks: RegistryBlock[]
 ): Record<string, RegistryBlock[]> {
-  return blocks.reduce(
-    (acc, block) => {
-      if (!acc[block.category]) {
-        acc[block.category] = [];
-      }
-      acc[block.category].push(block);
-      return acc;
-    },
-    {} as Record<string, RegistryBlock[]>
-  );
+  return blocks.reduce((acc, block) => {
+    if (!acc[block.category]) {
+      acc[block.category] = [];
+    }
+    acc[block.category].push(block);
+    return acc;
+  }, {} as Record<string, RegistryBlock[]>);
 }
